@@ -2816,7 +2816,9 @@ enum XMPPStreamConfig
 			NSXMLElement *bind = [NSXMLElement elementWithName:@"bind" xmlns:@"urn:ietf:params:xml:ns:xmpp-bind"];
 			
 			NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
-			[iq addAttributeWithName:@"type" stringValue:@"set"];
+      [iq addAttributeWithName:@"type" stringValue:@"set"];
+      // Added 'id' to be compatible with Apache Vysper
+      [iq addAttributeWithName:@"id" stringValue: [self generateUUID]];
 			[iq addChild:bind];
 			
 			NSString *outgoingStr = [iq compactXMLString];
@@ -3153,6 +3155,8 @@ enum XMPPStreamConfig
 			
 			NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
 			[iq addAttributeWithName:@"type" stringValue:@"set"];
+      // Added 'id' to be compatible with Apache Vysper
+      [iq addAttributeWithName:@"id" stringValue: [self generateUUID]];
 			[iq addChild:session];
 			
 			NSString *outgoingStr = [iq compactXMLString];
